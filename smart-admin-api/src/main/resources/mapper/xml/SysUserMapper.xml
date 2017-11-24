@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.admin.mapper.SysUserMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.smart.admin.entity.SysUser">
+		<id column="id" property="id" />
+		<result column="real_name" property="realName" />
+		<result column="password" property="password" />
+		<result column="mobile" property="mobile" />
+		<result column="salt" property="salt" />
+		<result column="dept_id" property="deptId" />
+		<result column="is_stop" property="isStop" />
+		<result column="create_time" property="createTime" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, real_name AS realName, password, mobile, salt, dept_id AS deptId, is_stop AS isStop, create_time AS createTime
+    </sql>
+
+	<!-- 查询用户的所有权限 -->
+	<select id="selectPermsByUserId" resultType="string">
+		select m.perms from sys_user_role ur
+		LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id
+		LEFT JOIN sys_menu m on rm.menu_id = m.id
+		where ur.user_id = #{userId}
+	</select>
+
+
+	<!-- 查询用户的所有菜单 -->
+	<select id="queryAllMenuId" resultType="long">
+		select distinct rm.menu_id from sys_user_role ur
+		LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id
+		where ur.user_id = #{userId}
+	</select>
+
+	<!-- 查询用户的所有角色id -->
+	<select id="selectRoleIdsByUserId" parameterType="java.lang.Long" resultType="java.lang.Long">
+		select t.role_id from sys_user_role t where t.user_id = #{userId}
+	</select>
+
+
+
+</mapper>

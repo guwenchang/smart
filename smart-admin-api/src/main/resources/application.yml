@@ -1,0 +1,62 @@
+# Tomcat
+server:
+    tomcat:
+        uri-encoding: UTF-8
+        max-threads: 1000
+        min-spare-threads: 30
+    port: 9001
+# mysql
+spring:
+    # 环境 dev|test|pro
+    profiles:
+        active: dev
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.jdbc.Driver
+    # jackson时间格式化
+    jackson:
+        time-zone: GMT+8
+        date-format: yyyy-MM-dd HH:mm:ss
+
+    http:
+        multipart:
+            max-file-size: 100MB
+            max-request-size: 100MB
+            enabled: true
+        encoding: utf-8
+    # 指定静态资源的路径
+    resources:
+        static-locations: classpath:/static/
+#mybatisplus
+mybatis-plus:
+  mapper-locations: classpath:/mapper/xml/*Mapper.xml
+  typeAliasesPackage: com.smart.admin.entity
+  global-config:
+    ##主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    id-type: 0
+    ##字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 1
+    refresh-mapper: true
+  configuration:
+    cache-enabled: true
+
+wechat:
+  mp:
+    appId: wx2307ddefb9a75b51
+    secret: c61fb242c120c739bf4e275edcf08735
+    token: iweichan
+    aesKey: pzQB326CYdT3CuSei0R0aCSg8Zjv9GovN5ncFiNkSAB
+  authredirectUrl: https://pediatricsweb.iweichan.com
+#logging
+logging:
+  level: info
+qiniu:
+  accessKey: FVp5M1lpOVeu_ynH11Lc_KhyAr4ZBW83T-g3kToQ
+  secretKey: aBtN0UZ9zzfWFZTpuo-GldBTWlhT47OmOk1QX4rG
+  bucket: pediatrics
+  baseUrl: http://otqeble9t.bkt.clouddn.com/
+jpush:
+  baby:
+    appKey: 5c3eba3d7645dac3ba131103
+    masterSecret: dfbcd11a7b0a47ea546d843e
+    isProduct: true
