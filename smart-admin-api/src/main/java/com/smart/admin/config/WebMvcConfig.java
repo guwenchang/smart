@@ -34,7 +34,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(apiInterceptor).addPathPatterns("/**")
-        .excludePathPatterns("/swagger/**").excludePathPatterns("/v2/api-docs");
+        .excludePathPatterns("/swagger/**").excludePathPatterns("/v2/api-docs").excludePathPatterns("/error");
     }
 
     /**
