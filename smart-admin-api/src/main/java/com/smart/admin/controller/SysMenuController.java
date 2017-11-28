@@ -46,6 +46,12 @@ public class SysMenuController extends BaseController {
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
     public ApiResult detail(@PathVariable Long id){
         SysMenu sysMenu = sysMenuService.selectById(id);
+        if (sysMenu.getParentId().equals(0)){
+            sysMenu.setParentName("顶层菜单");
+        }else {
+            SysMenu parent = sysMenuService.selectById(sysMenu.getParentId());
+            sysMenu.setParentName(parent.getName());
+        }
         return ApiResult.success(sysMenu);
     }
 

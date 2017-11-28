@@ -52,6 +52,11 @@ public class SysMenu implements Serializable {
      */
 	@TableField("order_num")
 	private Integer orderNum;
+	/**
+	 * 父级菜单名称
+	 */
+	@TableField(exist = false)
+	private String parentName;
 
 
 	/**
@@ -59,6 +64,15 @@ public class SysMenu implements Serializable {
 	 */
 	@TableField(exist = false)
 	private List<SysMenu> children;
+
+
+	public String getParentName() {
+		return parentName;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
+	}
 
 	public List<SysMenu> getChildren() {
 		return children;
