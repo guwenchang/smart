@@ -12,7 +12,7 @@ import java.util.UUID;
  * @author xiaobai
  * @date 2017/10/29 15:02
  **/
-public class TokenGenerator {
+public class Generator {
 
     public static String generateValue() {
         return generateValue(UUID.randomUUID().toString());

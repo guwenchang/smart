@@ -24,11 +24,6 @@ public class SysUserForm {
 	@ApiModelProperty("姓名")
 	private String realName;
 	/**
-	 * 密码
-	 */
-	@ApiModelProperty("姓名")
-	private String password;
-	/**
 	 * 手机号
 	 */
 	@ApiModelProperty("姓名")
@@ -41,12 +36,12 @@ public class SysUserForm {
 	@ApiModelProperty("是否禁用")
 	private Boolean isStop;
 
-	public Boolean getStop() {
+	public Boolean getIsStop() {
 		return isStop;
 	}
 
-	public void setStop(Boolean stop) {
-		isStop = stop;
+	public void setIsStop(Boolean isStop) {
+		this.isStop = isStop;
 	}
 
 	public String getRealName() {
@@ -65,13 +60,6 @@ public class SysUserForm {
 		this.id = id;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 	public String getMobile() {
 		return mobile;
@@ -94,7 +82,6 @@ public class SysUserForm {
 		return "SysUserForm{" +
 				"id=" + id +
 				", realName='" + realName + '\'' +
-				", password='" + password + '\'' +
 				", mobile='" + mobile + '\'' +
 				", roleIds=" + roleIds +
 				", isStop=" + isStop +

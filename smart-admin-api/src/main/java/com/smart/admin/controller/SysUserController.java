@@ -10,6 +10,7 @@ import com.smart.admin.form.SysUserSearchForm;
 import com.smart.admin.service.ISysUserRoleService;
 import com.smart.admin.service.ISysUserService;
 import com.smart.common.result.ApiResult;
+import com.smart.common.utils.Generator;
 import com.smart.common.utils.MD5Util;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,56 +41,60 @@ public class SysUserController extends BaseController {
     private ISysUserRoleService sysUserRoleService;
 
 
-
     @ApiOperation(value = "用户列表")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public ApiResult list(@RequestBody SysUserSearchForm sysUserSearchForm){
+    public ApiResult list(@RequestBody SysUserSearchForm sysUserSearchForm) {
         Page<SysUser> page = getPage(sysUserSearchForm);
         EntityWrapper<SysUser> wrapper = new EntityWrapper<>();
-        if (StringUtils.isNotBlank(sysUserSearchForm.getMobile())){
-            wrapper.eq(SysUser.MOBILE,sysUserSearchForm.getMobile());
+        if (StringUtils.isNotBlank(sysUserSearchForm.getMobile())) {
+            wrapper.eq(SysUser.MOBILE, sysUserSearchForm.getMobile());
         }
-        if (StringUtils.isNotBlank(sysUserSearchForm.getRealName())){
-            wrapper.like(SysUser.REAL_NAME,sysUserSearchForm.getRealName());
+        if (StringUtils.isNotBlank(sysUserSearchForm.getRealName())) {
+            wrapper.like(SysUser.REAL_NAME, sysUserSearchForm.getRealName());
         }
-        sysUserService.selectPage(page,wrapper);
+        sysUserService.selectPage(page, wrapper);
         return ApiResult.success(page);
     }
 
 
     @ApiOperation(value = "用户保存")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ApiResult list(@RequestBody SysUserForm sysUserForm){
+    public ApiResult save(@RequestBody SysUserForm sysUserForm) {
 
         SysUser sysUser = new SysUser();
-            if ( sysUserForm.getId() != null ) {
-                BeanUtils.copyProperties(sysUserForm,sysUser);
-                sysUserService.updateById(sysUser);
-                EntityWrapper<SysUserRole> wrapper = new EntityWrapper<>();
-                wrapper.eq(SysUserRole.USER_ID,sysUserForm.getId());
-                sysUserRoleService.delete(wrapper);
-                updateUserRole(sysUserForm,sysUser);
-            } else {
-                BeanUtils.copyProperties(sysUserForm,sysUser);
-                sysUser.setPassword(MD5Util.md5(sysUser.getMobile().substring(5)));
-                sysUserService.insert(sysUser);
-                updateUserRole(sysUserForm,sysUser);
+        BeanUtils.copyProperties(sysUserForm, sysUser);
+        if (sysUser.getId() != null) {
+            sysUserService.updateById(sysUser);
+            EntityWrapper<SysUserRole> sysUserRoleEntityWrapper = new EntityWrapper<>();
+            sysUserRoleEntityWrapper.eq(SysUserRole.USER_ID, sysUser.getId());
+            sysUserRoleService.delete(sysUserRoleEntityWrapper);
+            updateUserRole(sysUserForm, sysUser);
+        } else {
+            EntityWrapper<SysUser> wrapper = new EntityWrapper<>();
+            wrapper.eq(SysUser.MOBILE, sysUserForm.getMobile());
+            SysUser exist = sysUserService.selectOne(wrapper);
+            if (exist != null) {
+                return ApiResult.error("手机号已存在");
             }
+            sysUser.setSalt(Generator.generateSalt());
+            sysUser.setPassword(MD5Util.md5(sysUser.getMobile().substring(5) + sysUser.getSalt()));
+            sysUserService.insert(sysUser);
+            updateUserRole(sysUserForm, sysUser);
+        }
 
         return ApiResult.success();
     }
 
     @ApiOperation(value = "获取用户详情")
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
-    public ApiResult detail(@PathVariable Long id){
+    public ApiResult detail(@PathVariable Long id) {
         SysUser sysUser = sysUserService.selectById(id);
         sysUser.setRoleIds(sysUserService.selectRoleIdsByUserId(id));
         return ApiResult.success(sysUser);
     }
 
 
-
-    private void updateUserRole(SysUserForm sysUserForm,SysUser sysUser) {
+    private void updateUserRole(SysUserForm sysUserForm, SysUser sysUser) {
         List<SysUserRole> sysUserRoles = new ArrayList<>();
         for (Long roleId : sysUserForm.getRoleIds()) {
             SysUserRole sysUserRole = new SysUserRole();

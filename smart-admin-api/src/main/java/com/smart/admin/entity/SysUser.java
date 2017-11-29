@@ -53,7 +53,6 @@ public class SysUser implements Serializable {
      * 状态  1：禁用   0：正常
      */
 	@TableField("is_stop")
-	@JSONField(serialize = false)
 	private Boolean isStop;
     /**
      * 创建时间
