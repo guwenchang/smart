@@ -1,6 +1,8 @@
 package com.smart.common.result;
 
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * 通用返回结果
  *
@@ -112,7 +114,7 @@ public class ApiResult<T> {
 
     @Override
     public String toString() {
-        return "ApiResult{" + "status=" + status + ", msg='" + msg + '\'' + ", data=" + data.toString() + "}";
+        return "ApiResult{" + "status=" + status + ", msg='" + msg + '\'' + ", data=" + JSON.toJSONString(data) + "}";
     }
 
 }
