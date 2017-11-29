@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-11-25 10:24:54
+Date: 2017-11-29 19:25:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -129,16 +129,16 @@ CREATE TABLE `sys_menu` (
   `icon` varchar(50) DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 COMMENT='菜单权限管理';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='菜单权限管理';
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES ('1', '0', '系统管理', null, null, '0', 'el-icon-setting', '1');
-INSERT INTO `sys_menu` VALUES ('2', '1', '用户管理', '/user/list', 'userList', '1', 'fa fa-user', '1');
-INSERT INTO `sys_menu` VALUES ('3', '1', '角色管理', '/role/list', 'roleList', '1', 'dic fa-dic', '2');
-INSERT INTO `sys_menu` VALUES ('4', '1', '权限管理', '/menu/list', 'menuList', '1', 'yylb', '3');
-INSERT INTO `sys_menu` VALUES ('5', '1', '字典数据', '/dic/list', 'dicList', '1', 'yylb', '4');
+INSERT INTO `sys_menu` VALUES ('1', '0', '系统管理', null, null, '0', 'system', '1');
+INSERT INTO `sys_menu` VALUES ('2', '1', '用户管理', '/sys/user/list', 'userList', '1', 'system', '1');
+INSERT INTO `sys_menu` VALUES ('3', '1', '角色管理', '/sys/role/list', 'roleList', '1', 'system', '2');
+INSERT INTO `sys_menu` VALUES ('4', '1', '权限管理', '/sys/menu/list', 'menuList', '1', 'system', '3');
+INSERT INTO `sys_menu` VALUES ('5', '1', '字典数据', '/sys/dic/list', 'dicList', '1', 'system', '4');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -150,12 +150,13 @@ CREATE TABLE `sys_role` (
   `remark` varchar(100) DEFAULT NULL COMMENT '备注',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='角色';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='角色';
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', '管理员', '后台管理员', '2017-07-27 15:40:23');
+INSERT INTO `sys_role` VALUES ('9', '测试车', '测测', '2017-11-28 17:49:13');
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -166,11 +167,19 @@ CREATE TABLE `sys_role_menu` (
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
 
 -- ----------------------------
 -- Records of sys_role_menu
 -- ----------------------------
+INSERT INTO `sys_role_menu` VALUES ('14', '1', '1');
+INSERT INTO `sys_role_menu` VALUES ('15', '1', '2');
+INSERT INTO `sys_role_menu` VALUES ('16', '1', '3');
+INSERT INTO `sys_role_menu` VALUES ('17', '1', '4');
+INSERT INTO `sys_role_menu` VALUES ('18', '1', '5');
+INSERT INTO `sys_role_menu` VALUES ('23', '9', '2');
+INSERT INTO `sys_role_menu` VALUES ('24', '9', '3');
+INSERT INTO `sys_role_menu` VALUES ('25', '9', '4');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -186,12 +195,13 @@ CREATE TABLE `sys_user` (
   `is_stop` bit(1) DEFAULT b'0' COMMENT '状态  1：禁用   0：正常',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COMMENT='系统用户';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统用户';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', '管理员', '9FE469EF74F17DC7809655D86218ED27', '15210015381', '3f41de1c7dda447ab450ff011e363f89', '1', '\0', '2016-11-09 11:11:11');
+INSERT INTO `sys_user` VALUES ('2', '测试测试', '9DD1F6392D04539324C0718D53B08137', '17611265680', '8ec18253a557497dbbe4ad88d3aaf03f', null, '\0', '2017-11-29 17:56:29');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -202,8 +212,11 @@ CREATE TABLE `sys_user_role` (
   `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COMMENT='用户与角色对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='用户与角色对应关系';
 
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
+INSERT INTO `sys_user_role` VALUES ('13', '1', '1');
+INSERT INTO `sys_user_role` VALUES ('14', '1', '9');
+INSERT INTO `sys_user_role` VALUES ('15', '2', '1');
