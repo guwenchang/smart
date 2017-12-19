@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author xiaobai
- * @since 2017-11-24
+ * @since 2017-12-19
  */
 @TableName("sys_dept")
 public class SysDept implements Serializable {
@@ -40,15 +40,15 @@ public class SysDept implements Serializable {
 	@TableField("order_num")
 	private Integer orderNum;
     /**
-     * 状态  1：禁用   0：正常
-     */
-	@TableField("is_deleted")
-	private Boolean isDeleted;
-    /**
      * 创建时间
      */
 	@TableField("create_time")
 	private Date createTime;
+    /**
+     * 删除标志
+     */
+	@TableField("delete_flag")
+	private Boolean deleteFlag;
 
 
 	public Long getId() {
@@ -83,20 +83,20 @@ public class SysDept implements Serializable {
 		this.orderNum = orderNum;
 	}
 
-	public Boolean isIsDeleted() {
-		return isDeleted;
-	}
-
-	public void setIsDeleted(Boolean isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
 	public Date getCreateTime() {
 		return createTime;
 	}
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public Boolean getDeleteFlag() {
+		return deleteFlag;
+	}
+
+	public void setDeleteFlag(Boolean deleteFlag) {
+		this.deleteFlag = deleteFlag;
 	}
 
 	public static final String ID = "id";
@@ -107,9 +107,9 @@ public class SysDept implements Serializable {
 
 	public static final String ORDER_NUM = "order_num";
 
-	public static final String IS_DELETED = "is_deleted";
-
 	public static final String CREATE_TIME = "create_time";
+
+	public static final String DELETE_FLAG = "delete_flag";
 
 	@Override
 	public String toString() {
@@ -118,8 +118,8 @@ public class SysDept implements Serializable {
 			", parentId=" + parentId +
 			", name=" + name +
 			", orderNum=" + orderNum +
-			", isDeleted=" + isDeleted +
 			", createTime=" + createTime +
+			", deleteFlag=" + deleteFlag +
 			"}";
 	}
 }

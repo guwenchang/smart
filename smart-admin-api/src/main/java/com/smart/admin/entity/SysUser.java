@@ -52,8 +52,8 @@ public class SysUser implements Serializable {
     /**
      * 状态  1：禁用   0：正常
      */
-	@TableField("is_stop")
-	private Boolean isStop;
+	@TableField("stop_flag")
+	private Boolean stopFlag;
     /**
      * 创建时间
      */
@@ -125,12 +125,12 @@ public class SysUser implements Serializable {
 		this.deptId = deptId;
 	}
 
-	public Boolean isIsStop() {
-		return isStop;
+	public Boolean getStopFlag() {
+		return stopFlag;
 	}
 
-	public void setIsStop(Boolean isStop) {
-		this.isStop = isStop;
+	public void setStopFlag(Boolean stopFlag) {
+		this.stopFlag = stopFlag;
 	}
 
 	public Date getCreateTime() {
@@ -160,14 +160,15 @@ public class SysUser implements Serializable {
 	@Override
 	public String toString() {
 		return "SysUser{" +
-			"id=" + id +
-			", realName=" + realName +
-			", password=" + password +
-			", mobile=" + mobile +
-			", salt=" + salt +
-			", deptId=" + deptId +
-			", isStop=" + isStop +
-			", createTime=" + createTime +
-			"}";
+				"id=" + id +
+				", realName='" + realName + '\'' +
+				", password='" + password + '\'' +
+				", mobile='" + mobile + '\'' +
+				", salt='" + salt + '\'' +
+				", deptId=" + deptId +
+				", stopFlag=" + stopFlag +
+				", createTime=" + createTime +
+				", roleIds=" + roleIds +
+				'}';
 	}
 }

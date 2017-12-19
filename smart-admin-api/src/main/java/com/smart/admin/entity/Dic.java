@@ -12,7 +12,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author xiaobai
- * @since 2017-11-24
+ * @since 2017-12-19
  */
 @TableName("smart_dic")
 public class Dic implements Serializable {
@@ -41,6 +41,11 @@ public class Dic implements Serializable {
      */
 	@TableField("order_num")
 	private Integer orderNum;
+    /**
+     * 删除标志
+     */
+	@TableField("delete_flag")
+	private Boolean deleteFlag;
 
 
 	public Long getId() {
@@ -83,6 +88,14 @@ public class Dic implements Serializable {
 		this.orderNum = orderNum;
 	}
 
+	public Boolean getDeleteFlag() {
+		return deleteFlag;
+	}
+
+	public void setDeleteFlag(Boolean deleteFlag) {
+		this.deleteFlag = deleteFlag;
+	}
+
 	public static final String ID = "id";
 
 	public static final String CODE = "code";
@@ -93,6 +106,8 @@ public class Dic implements Serializable {
 
 	public static final String ORDER_NUM = "order_num";
 
+	public static final String DELETE_FLAG = "delete_flag";
+
 	@Override
 	public String toString() {
 		return "Dic{" +
@@ -101,6 +116,7 @@ public class Dic implements Serializable {
 			", value=" + value +
 			", name=" + name +
 			", orderNum=" + orderNum +
+			", deleteFlag=" + deleteFlag +
 			"}";
 	}
 }

@@ -1,11 +1,12 @@
 package com.smart.admin.entity;
 
-import com.baomidou.mybatisplus.enums.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -13,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author xiaobai
- * @since 2017-11-24
+ * @since 2017-12-19
  */
 @TableName("smart_user")
 public class User implements Serializable {
@@ -59,8 +60,8 @@ public class User implements Serializable {
     /**
      * 是否停用
      */
-	@TableField("is_stop")
-	private Boolean isStop;
+	@TableField("stop_flag")
+	private Boolean stopFlag;
     /**
      * 创建时间
      */
@@ -132,12 +133,12 @@ public class User implements Serializable {
 		this.avatar = avatar;
 	}
 
-	public Boolean isIsStop() {
-		return isStop;
+	public Boolean getStopFlag() {
+		return stopFlag;
 	}
 
-	public void setIsStop(Boolean isStop) {
-		this.isStop = isStop;
+	public void setStopFlag(Boolean stopFlag) {
+		this.stopFlag = stopFlag;
 	}
 
 	public Date getCreateTime() {
@@ -164,7 +165,7 @@ public class User implements Serializable {
 
 	public static final String AVATAR = "avatar";
 
-	public static final String IS_STOP = "is_stop";
+	public static final String STOP_FLAG = "stop_flag";
 
 	public static final String CREATE_TIME = "create_time";
 
@@ -179,7 +180,7 @@ public class User implements Serializable {
 			", openId=" + openId +
 			", unionId=" + unionId +
 			", avatar=" + avatar +
-			", isStop=" + isStop +
+			", stopFlag=" + stopFlag +
 			", createTime=" + createTime +
 			"}";
 	}

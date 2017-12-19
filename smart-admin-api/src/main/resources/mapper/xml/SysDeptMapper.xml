@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.admin.mapper.SysDeptMapper">
 
-	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.smart.admin.entity.SysDept">
-		<id column="id" property="id" />
-		<result column="parent_id" property="parentId" />
-		<result column="name" property="name" />
-		<result column="order_num" property="orderNum" />
-		<result column="is_deleted" property="isDeleted" />
-		<result column="create_time" property="createTime" />
-	</resultMap>
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.smart.admin.entity.SysDept">
+        <id column="id" property="id" />
+        <result column="parent_id" property="parentId" />
+        <result column="name" property="name" />
+        <result column="order_num" property="orderNum" />
+        <result column="create_time" property="createTime" />
+        <result column="delete_flag" property="deleteFlag" />
+    </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, parent_id AS parentId, name, order_num AS orderNum, is_deleted AS isDeleted, create_time AS createTime
+        id, parent_id AS parentId, name, order_num AS orderNum, create_time AS createTime, delete_flag AS deleteFlag
     </sql>
 
 </mapper>

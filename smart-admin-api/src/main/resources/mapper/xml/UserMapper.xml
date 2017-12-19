@@ -2,23 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.admin.mapper.UserMapper">
 
-	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.smart.admin.entity.User">
-		<id column="id" property="id" />
-		<result column="mobile" property="mobile" />
-		<result column="nick_name" property="nickName" />
-		<result column="password" property="password" />
-		<result column="salt" property="salt" />
-		<result column="open_id" property="openId" />
-		<result column="union_id" property="unionId" />
-		<result column="avatar" property="avatar" />
-		<result column="is_stop" property="isStop" />
-		<result column="create_time" property="createTime" />
-	</resultMap>
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.smart.admin.entity.User">
+        <id column="id" property="id" />
+        <result column="mobile" property="mobile" />
+        <result column="nick_name" property="nickName" />
+        <result column="password" property="password" />
+        <result column="salt" property="salt" />
+        <result column="open_id" property="openId" />
+        <result column="union_id" property="unionId" />
+        <result column="avatar" property="avatar" />
+        <result column="stop_flag" property="stopFlag" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, mobile, nick_name AS nickName, password, salt, open_id AS openId, union_id AS unionId, avatar, is_stop AS isStop, create_time AS createTime
+        id, mobile, nick_name AS nickName, password, salt, open_id AS openId, union_id AS unionId, avatar, stop_flag AS stopFlag, create_time AS createTime
     </sql>
 
 </mapper>
