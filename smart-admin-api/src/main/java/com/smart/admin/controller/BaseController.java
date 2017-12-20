@@ -40,7 +40,7 @@ public class BaseController {
 
 
 	protected SysUser currentUser() {
-		return (SysUser) request.getSession().getAttribute(Constant.CURRENT_USER);
+		return (SysUser) session.getAttribute(Constant.CURRENT_USER);
 	}
 
 	protected Long currentUserId() {
